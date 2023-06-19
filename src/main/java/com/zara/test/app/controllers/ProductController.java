@@ -15,17 +15,19 @@ import com.zara.test.app.services.ProductService;
 
 @RestController
 @RequestMapping("/product/")
-public class ProductController {
+public class ProductController implements SwaggerProductController {
 
 	@Autowired
 	private ProductService service;
 	
+	@Override
 	@GetMapping("/{productId}")
 	@ResponseStatus(HttpStatus.OK)
 	public Product getDetails(@PathVariable(name="productId") Long id) {
 		return service.getProductDetails(id);
 	}
 	
+	@Override
 	@GetMapping("/{productId}/similar")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Long> getProductSimilarIds(@PathVariable(name="productId") Long id) {
